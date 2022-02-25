@@ -73,5 +73,6 @@ public class MainManager : MonoBehaviour
   {
     m_GameOver = true;
     GameOverText.SetActive(true);
+    GameManager.Instance.SetTopScore();
   }
 }

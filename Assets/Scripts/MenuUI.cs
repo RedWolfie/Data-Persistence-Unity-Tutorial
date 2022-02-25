@@ -10,21 +10,21 @@ using UnityEditor;
 public class MenuUI : MonoBehaviour
 {
   private int mainScene = 1;
-  private string playerName;
 
   public void Awake()
   {
+    GameManager.Instance.LoadData();
     GameObject.FindGameObjectWithTag("Score text").GetComponent<Text>().text = "Best score: " + GameManager.Instance.GetTopScorePlayer() + " " + GameManager.Instance.GetScore();
   }
 
   public void OnStart()
   {
-    GameManager.Instance.SetTopScore(playerName);
     SceneManager.LoadScene(mainScene);
   }
 
   public void OnQuit()
   {
+    GameManager.Instance.SaveData();
   #if UNITY_EDITOR
     EditorApplication.ExitPlaymode();
   #else
@@ -34,6 +34,6 @@ public class MenuUI : MonoBehaviour
 
   public void OnNameChange(string change)
   {
-    playerName = change;
+    GameManager.Instance.playerName = change;
   }
 }
